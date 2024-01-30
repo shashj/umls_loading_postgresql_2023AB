@@ -9,6 +9,8 @@ This script has been tested in PostgreSQL 8.2.3 on Mac OS 10.4.10
 Thank you for Mr Banda and Mr Bedrick!
 This script has been tested in PostgreSQL 11.2 on Linux (Deepin 20.1, Debain 10 cored).
 
+This script is modified to work with PostgreSQL 16 and UMLS2023AB
+
 */
 
 create schema if not exists _2023ab; /* You can change the schema name as your wish. */
@@ -161,7 +163,7 @@ CREATE TABLE MRMAP (
 	MAPSETCUI	char(8),
 	MAPSETSAB	char(40),
 	MAPSUBSETID	char(10),
-	MAPRANK	integer external,
+	MAPRANK	integer,
 	MAPID	char(50),
 	MAPSID	char(50),
 	FROMID	char(50),
