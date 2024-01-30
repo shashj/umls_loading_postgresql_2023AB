@@ -61,9 +61,9 @@ ALTER TABLE MRCONSO DROP COLUMN dummy;
 
 DROP TABLE if exists MRCUI;
 CREATE TABLE MRCUI (
-	CUI1	char(8),
-	VER	char(10),
-	REL	char(4),
+	CUI1	char(8) NOT NULL,
+	VER	char(10) NOT NULL,
+	REL	char(4) NOT NULL,
 	RELA	char(100),
 	MAPREASON	char(4000),
 	CUI2	char(8),
@@ -77,13 +77,13 @@ ALTER TABLE MRCUI DROP COLUMN dummy;
 
 DROP TABLE if exists MRDEF;
 CREATE TABLE MRDEF (
-	CUI	char(8),
-	AUI	char(9),
-	ATUI	char(11),
+	CUI	char(8) NOT NULL,
+	AUI	char(9) NOT NULL,
+	ATUI	char(11) NOT NULL,
 	SATUI	char(50),
-	SAB	char(40),
-	DEF	char(4000),
-	SUPPRESS	char(1),
+	SAB	char(40) NOT NULL,
+	DEF	char(4000) NOT NULL,
+	SUPPRESS	char(1) NOT NULL,
 	CVF	integer,
 	dummy char(1)
 );
@@ -94,260 +94,260 @@ ALTER TABLE MRDEF DROP COLUMN dummy;
 
 DROP TABLE if exists MRDOC;
 CREATE TABLE MRDOC (
-	DOCKEY	char(50),
+	DOCKEY	char(50) NOT NULL,
 	VALUE	char(200),
-	TYPE	char(50),
+	TYPE	char(50) NOT NULL,
 	EXPL	char(1000),
 	dummy char(1)
 );
 
-COPY MRDOC FROM '/Users/shashankjatav/shash_work/2023AB/META/MRDOC.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRDOC FROM '/Users/shashankjatav/shash_work/2023AB/META/MRDOC.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRDOC DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRFILES;
 CREATE TABLE MRFILES (
-	FIL	varchar(50),
-	DES	varchar(200),
-	FMT	text,
-	CLS	int,
-	RWS	int,
-	BTS	bigint,
+	FIL	char(50),
+	DES	char(200),
+	FMT	char(300),
+	CLS	integer,
+	RWS	integer,
+	BTS	integer,
 	dummy char(1)
 );
 
-COPY MRFILES FROM '/Users/shashankjatav/shash_work/2023AB/META/MRFILES.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRFILES FROM '/Users/shashankjatav/shash_work/2023AB/META/MRFILES.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRFILES DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRHIER;
 CREATE TABLE MRHIER (
-	CUI	char(12) NOT NULL,
-	AUI	varchar(9) NOT NULL,
-	CXN	int NOT NULL,
-	PAUI	varchar(9),
-	SAB	varchar(20) NOT NULL,
-	RELA	varchar(100),
-	PTR	text,
-	HCD	varchar(70),
-	CVF	int,
+	CUI	char(8) NOT NULL,
+	AUI	char(9) NOT NULL,
+	CXN	integer NOT NULL,
+	PAUI	char(10),
+	SAB	char(40) NOT NULL,
+	RELA	char(100),
+	PTR	char(1000),
+	HCD	char(100),
+	CVF	integer,
 	dummy char(1)
 );
 
-COPY MRHIER FROM '/Users/shashankjatav/shash_work/2023AB/META/MRHIER.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRHIER FROM '/Users/shashankjatav/shash_work/2023AB/META/MRHIER.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRHIER DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRHIST;
 CREATE TABLE MRHIST (
-	CUI	char(12) NOT NULL,
-	SOURCEUI	varchar(50) NOT NULL,
-	SAB	varchar(20) NOT NULL,
-	SVER	varchar(20) NOT NULL,
-	CHANGETYPE	text NOT NULL,
-	CHANGEKEY	text NOT NULL,
-	CHANGEVAL	text NOT NULL,
-	REASON	text,
-	CVF	int,
+	CUI	char(8) NOT NULL,
+	SOURCEUI	char(100) NOT NULL,
+	SAB	char(40) NOT NULL,
+	SVER	char(40) NOT NULL,
+	CHANGETYPE	char(1000) NOT NULL,
+	CHANGEKEY	char(1000) NOT NULL,
+	CHANGEVAL	char(1000) NOT NULL,
+	REASON	char(1000),
+	CVF	integer,
 	dummy char(1)
 );
 
-COPY MRHIST FROM '/Users/shashankjatav/shash_work/2023AB/META/MRHIST.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRHIST FROM '/Users/shashankjatav/shash_work/2023AB/META/MRHIST.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRHIST DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRMAP;
 CREATE TABLE MRMAP (
-	MAPSETCUI	char(12),
-	MAPSETSAB	varchar(20),
-	MAPSUBSETID	varchar(10),
-	MAPRANK	int,
-	MAPID	varchar(50),
-	MAPSID	varchar(50),
-	FROMID	varchar(50),
-	FROMSID	varchar(50),
-	FROMEXPR	text,
-	FROMTYPE	varchar(50),
-	FROMRULE	text,
-	FROMRES	text,
-	REL	varchar(4),
-	RELA	varchar(100),
-	TOID	varchar(50),
-	TOSID	varchar(50),
-	TOEXPR	text,
-	TOTYPE	varchar(50),
-	TORULE	text,
-	TORES	text,
-	MAPRULE	text,
-	MAPRES	text,
-	MAPTYPE	varchar(50),
-	MAPATN	varchar(20),
-	MAPATV	text,
-	CVF	int,
+	MAPSETCUI	char(8),
+	MAPSETSAB	char(40),
+	MAPSUBSETID	char(10),
+	MAPRANK	integer external,
+	MAPID	char(50),
+	MAPSID	char(50),
+	FROMID	char(50),
+	FROMSID	char(50),
+	FROMEXPR	char(4000),
+	FROMTYPE	char(50),
+	FROMRULE	char(4000),
+	FROMRES	char(4000),
+	REL	char(4),
+	RELA	char(100),
+	TOID	char(50),
+	TOSID	char(50),
+	TOEXPR	char(4000),
+	TOTYPE	char(50),
+	TORULE	char(4000),
+	TORES	char(4000),
+	MAPRULE	char(4000),
+	MAPRES	char(4000),
+	MAPTYPE	char(50),
+	MAPATN	char(100),
+	MAPATV	char(4000),
+	CVF	integer,
 	dummy char(1)
 );
-COPY MRMAP FROM '/Users/shashankjatav/shash_work/2023AB/META/MRMAP.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRMAP FROM '/Users/shashankjatav/shash_work/2023AB/META/MRMAP.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRMAP DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRRANK;
 CREATE TABLE MRRANK (
-	RANK	int NOT NULL,
-	SAB	varchar(20) NOT NULL,
-	TTY	varchar(20) NOT NULL,
+	RANK	integer NOT NULL,
+	SAB	char(40) NOT NULL,
+	TTY	char(40) NOT NULL,
 	SUPPRESS	char(1) NOT NULL,
 	dummy char(1)
 );
-COPY MRRANK FROM '/Users/shashankjatav/shash_work/2023AB/META/MRRANK.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRRANK FROM '/Users/shashankjatav/shash_work/2023AB/META/MRRANK.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRRANK DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRREL;
 CREATE TABLE MRREL (
-	CUI1	char(12) NOT NULL,
-	AUI1	varchar(9),
-	STYPE1	varchar(50) NOT NULL,
-	REL	varchar(4) NOT NULL,
-	CUI2	char(12) NOT NULL,
-	AUI2	varchar(9),
-	STYPE2	varchar(50) NOT NULL,
-	RELA	varchar(100),
-	RUI	varchar(10) NOT NULL,
-	SRUI	varchar(50),
-	SAB	varchar(20) NOT NULL,
-	SL	varchar(20) NOT NULL,
-	RG	varchar(10),
-	DIR	varchar(1),
+	CUI1	char(8) NOT NULL,
+	AUI1	char(9) NOT NULL,
+	STYPE1	char(50) NOT NULL,
+	REL	char(4) NOT NULL,
+	CUI2	char(8) NOT NULL,
+	AUI2	char(9),
+	STYPE2	char(50) NOT NULL,
+	RELA	char(100),
+	RUI	char(10) NOT NULL,
+	SRUI	char(50),
+	SAB	char(40) NOT NULL,
+	SL	char(40) NOT NULL,
+	RG	char(10),
+	DIR	char(1),
 	SUPPRESS	char(1) NOT NULL,
-	CVF	int,
+	CVF	integer,
 	dummy char(1)
 );
 
-COPY MRREL FROM '/Users/shashankjatav/shash_work/2023AB/META/MRREL.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRREL FROM '/Users/shashankjatav/shash_work/2023AB/META/MRREL.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRREL DROP COLUMN dummy;
 
 DROP TABLE if exists MRSAB;
 CREATE TABLE MRSAB (
-	VCUI	char(12),
-	RCUI	char(12),
-	VSAB	varchar(50) NOT NULL,
-	RSAB	varchar(20) NOT NULL,
-	SON	text NOT NULL,
-	SF	varchar(20) NOT NULL,
-	SVER	varchar(20),
-	VSTART	char(10),
-	VEND	char(10),
-	IMETA	varchar(10) NOT NULL,
-	RMETA	varchar(10),
-	SLC	text,
-	SCC	text,
-	SRL	int NOT NULL,
-	TFR	int,
-	CFR	int,
-	CXTY	varchar(50),
-	TTYL	varchar(200),
-	ATNL	text,
+	VCUI	char(8),
+	RCUI	char(8),
+	VSAB	char(40) NOT NULL,
+	RSAB	char(40) NOT NULL,
+	SON	char(3000) NOT NULL,
+	SF	char(40) NOT NULL,
+	SVER	char(40),
+	VSTART	char(8),
+	VEND	char(8),
+	IMETA	char(10) NOT NULL,
+	RMETA	char(10),
+	SLC	char(1000),
+	SCC	char(1000),
+	SRL	integer NOT NULL,
+	TFR	integer,
+	CFR	integer,
+	CXTY	char(50),
+	TTYL	char(400),
+	ATNL	char(4000),
 	LAT	char(3),
-	CENC	varchar(20) NOT NULL,
+	CENC	char(40) NOT NULL,
 	CURVER	char(1) NOT NULL,
 	SABIN	char(1) NOT NULL,
-	SSN	text NOT NULL,
-	SCIT	text NOT NULL,
+	SSN	char(3000) NOT NULL,
+	SCIT	char(4000) NOT NULL,
 	dummy char(1)
 );
-COPY MRSAB FROM '/Users/shashankjatav/shash_work/2023AB/META/MRSAB.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRSAB FROM '/Users/shashankjatav/shash_work/2023AB/META/MRSAB.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRSAB DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRSAT;
 CREATE TABLE MRSAT (
-	CUI	char(12) NOT NULL,
-	LUI	char(12),
-	SUI	char(12),
-	METAUI	varchar(50),
-	STYPE	varchar(50) NOT NULL,
-	CODE	varchar(50),
-	ATUI	varchar(15) NOT NULL,
-	SATUI	varchar(50),
-	ATN	varchar(80) NOT NULL,
-	SAB	varchar(20) NOT NULL,
-	ATV	text,
+	CUI	char(8) NOT NULL,
+	LUI	char(10),
+	SUI	char(10),
+	METAUI	char(100),
+	STYPE	char(50) NOT NULL,
+	CODE	char(100),
+	ATUI	char(11) NOT NULL,
+	SATUI	char(50),
+	ATN	char(100) NOT NULL,
+	SAB	char(40) NOT NULL,
+	ATV	char(4000),
 	SUPPRESS	char(1) NOT NULL,
-	CVF	int,
+	CVF	integer,
 	dummy char(1)
 );
-COPY MRSAT FROM '/Users/shashankjatav/shash_work/2023AB/META//MRSAT.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRSAT FROM '/Users/shashankjatav/shash_work/2023AB/META//MRSAT.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRSAT DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRSMAP;
 CREATE TABLE MRSMAP (
-	MAPSETCUI	char(12),
-	MAPSETSAB	varchar(20),
-	MAPID	varchar(50),
-	MAPSID	varchar(50),
-	FROMEXPR	text,
-	FROMTYPE	varchar(50),
-	REL	varchar(4),
-	RELA	varchar(100),
-	TOEXPR	text,
-	TOTYPE	varchar(50),
-	CVF	int,
+	MAPSETCUI	char(8),
+	MAPSETSAB	char(40),
+	MAPID	char(50),
+	MAPSID	char(50),
+	FROMEXPR	char(4000),
+	FROMTYPE	char(50),
+	REL	char(4),
+	RELA	char(100),
+	TOEXPR	char(4000),
+	TOTYPE	char(50),
+	CVF	integer,
 	dummy char(1)
 );
-COPY MRSMAP FROM '/Users/shashankjatav/shash_work/2023AB/META/MRSMAP.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRSMAP FROM '/Users/shashankjatav/shash_work/2023AB/META/MRSMAP.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRSMAP DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRSTY;
 CREATE TABLE MRSTY (
-	CUI	char(12) NOT NULL,
+	CUI	char(8) NOT NULL,
 	TUI	char(4) NOT NULL,
-	STN	varchar(100) NOT NULL,
-	STY	varchar(50) NOT NULL,
-	ATUI	varchar(15) NOT NULL,
-	CVF	int,
+	STN	char(100) NOT NULL,
+	STY	char(50) NOT NULL,
+	ATUI	char(11) NOT NULL,
+	CVF	integer,
 	dummy char(1)
 );
-COPY MRSTY FROM '/Users/shashankjatav/shash_work/2023AB/META/MRSTY.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRSTY FROM '/Users/shashankjatav/shash_work/2023AB/META/MRSTY.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRSTY DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRXNS_ENG;
 CREATE TABLE MRXNS_ENG (
 	LAT	char(3) NOT NULL,
-	NSTR	text NOT NULL,
-	CUI	char(12) NOT NULL,
-	LUI	char(12) NOT NULL,
-	SUI	char(12) NOT NULL,
+	NSTR	char(3000) NOT NULL,
+	CUI	char(8) NOT NULL,
+	LUI	char(10) NOT NULL,
+	SUI	char(10) NOT NULL,
 	dummy char(1)
 );
-COPY MRXNS_ENG FROM '/Users/shashankjatav/shash_work/2023AB/META/MRXNS_ENG.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRXNS_ENG FROM '/Users/shashankjatav/shash_work/2023AB/META/MRXNS_ENG.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRXNS_ENG DROP COLUMN dummy;
 
 
 DROP TABLE if exists MRXNW_ENG;
 CREATE TABLE MRXNW_ENG (
 	LAT	char(3) NOT NULL,
-	NWD	varchar(100) NOT NULL,
-	CUI	char(12) NOT NULL,
-	LUI	char(12) NOT NULL,
-	SUI	char(12) NOT NULL,
+	NWD	char(200) NOT NULL,
+	CUI	char(8) NOT NULL,
+	LUI	char(10) NOT NULL,
+	SUI	char(10) NOT NULL,
 	dummy char(1)
 );
-COPY MRXNW_ENG FROM '/Users/shashankjatav/shash_work/2023AB/META/MRXNW_ENG.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRXNW_ENG FROM '/Users/shashankjatav/shash_work/2023AB/META/MRXNW_ENG.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRXNW_ENG DROP COLUMN dummy;
 
 DROP TABLE if exists MRXW_ENG;
 CREATE TABLE MRXW_ENG (
 	LAT	char(3) NOT NULL,
-	WD	varchar(100) NOT NULL,
-	CUI	char(12) NOT NULL,
-	LUI	char(12) NOT NULL,
-	SUI	char(12) NOT NULL,
+	WD	char(200) NOT NULL,
+	CUI	char(8) NOT NULL,
+	LUI	char(10) NOT NULL,
+	SUI	char(10) NOT NULL,
 	dummy char(1)
 );
-COPY MRXW_ENG FROM '/Users/shashankjatav/shash_work/2023AB/META/MRXW_ENG.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRXW_ENG FROM '/Users/shashankjatav/shash_work/2023AB/META/MRXW_ENG.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRXW_ENG DROP COLUMN dummy;
 
 /*  Because I only use English items, I deleted the load of MRXW_XXX loaders except English one.
@@ -368,88 +368,88 @@ ALTER TABLE MRXW_ENG DROP COLUMN dummy;
 
 DROP TABLE if exists MRAUI;
 CREATE TABLE MRAUI (
-	AUI1	varchar(9) NOT NULL,
-	CUI1	char(12) NOT NULL,
-	VER	varchar(10) NOT NULL,
-	REL	varchar(4),
-	RELA	varchar(100),
-	MAPREASON	text NOT NULL,
-	AUI2	varchar(9) NOT NULL,
-	CUI2	char(12) NOT NULL,
+	AUI1	char(9) NOT NULL,
+	CUI1	char(8) NOT NULL,
+	VER	char(10) NOT NULL,
+	REL	char(4),
+	RELA	char(100),
+	MAPREASON	char(4000) NOT NULL,
+	AUI2	char(9) NOT NULL,
+	CUI2	char(8) NOT NULL,
 	MAPIN	char(1) NOT NULL,
 	dummy char(1)
 );
-COPY MRAUI FROM '/Users/shashankjatav/shash_work/2023AB/META/MRAUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MRAUI FROM '/Users/shashankjatav/shash_work/2023AB/META/MRAUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRAUI DROP COLUMN dummy;
 
 
 DROP TABLE if exists AMBIGSUI;
 CREATE TABLE AMBIGSUI (
-	SUI	char(12) NOT NULL,
-	CUI	char(12) NOT NULL,
+	SUI	char(10) NOT NULL,
+	CUI	char(8) NOT NULL,
 	dummy char(1)
 );
 
-COPY AMBIGSUI FROM '/Users/shashankjatav/shash_work/2023AB/META/AMBIGSUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy AMBIGSUI FROM '/Users/shashankjatav/shash_work/2023AB/META/AMBIGSUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE AMBIGSUI DROP COLUMN dummy;
 
 
 DROP TABLE if exists AMBIGLUI;
 CREATE TABLE AMBIGLUI (
-	LUI	char(12) NOT NULL,
-	CUI	char(12) NOT NULL,
+	LUI	char(10) NOT NULL,
+	CUI	char(8) NOT NULL,
 	dummy char(1)
 );
 
-COPY AMBIGLUI FROM '/Users/shashankjatav/shash_work/2023AB/META/AMBIGLUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy AMBIGLUI FROM '/Users/shashankjatav/shash_work/2023AB/META/AMBIGLUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE AMBIGLUI DROP COLUMN dummy;
 
 
 DROP TABLE if exists DELETEDCUI;
 CREATE TABLE DELETEDCUI (
-	PCUI	char(12) NOT NULL,
-	PSTR	text NOT NULL,
+	PCUI	char(8) NOT NULL,
+	PSTR	char(3000) NOT NULL,
 	dummy char(1)
 );
-COPY DELETEDCUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/DELETEDCUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy DELETEDCUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/DELETEDCUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE DELETEDCUI DROP COLUMN dummy;
 
 
 DROP TABLE if exists DELETEDLUI;
 CREATE TABLE DELETEDLUI (
-	PLUI	char(12) NOT NULL,
-	PSTR	text NOT NULL,
+	PLUI	char(10) NOT NULL,
+	PSTR	char(3000) NOT NULL,
 	dummy char(1)
 );
-COPY DELETEDLUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/DELETEDLUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy DELETEDLUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/DELETEDLUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE DELETEDLUI DROP COLUMN dummy;
 
 DROP TABLE if exists DELETEDSUI;
 CREATE TABLE DELETEDSUI (
-	PSUI	char(12) NOT NULL,
+	PSUI	char(10) NOT NULL,
 	LAT	char(3) NOT NULL,
-	PSTR	text NOT NULL,
+	PSTR	char(3000) NOT NULL,
 	dummy char(1)
 );
-COPY DELETEDSUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/DELETEDSUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy DELETEDSUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/DELETEDSUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE DELETEDSUI DROP COLUMN dummy;
 
 
 DROP TABLE if exists MERGEDCUI;
 CREATE TABLE MERGEDCUI (
-	PCUI	char(12) NOT NULL,
-	CUI	char(12) NOT NULL,
+	PCUI	char(8) NOT NULL,
+	CUI	char(8) NOT NULL,
 	dummy char(1)
 );
-COPY MERGEDCUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/MERGEDCUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MERGEDCUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/MERGEDCUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MERGEDCUI DROP COLUMN dummy;
 
 
 DROP TABLE if exists MERGEDLUI;
 CREATE TABLE MERGEDLUI (
-	PLUI	char(12),
-	LUI	char(12),
+	PLUI	char(10),
+	LUI	char(10),
 	dummy char(1)
 );
-COPY MERGEDLUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/MERGEDLUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+\copy MERGEDLUI FROM '/Users/shashankjatav/shash_work/2023AB/META/CHANGE/MERGEDLUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MERGEDLUI DROP COLUMN dummy;
