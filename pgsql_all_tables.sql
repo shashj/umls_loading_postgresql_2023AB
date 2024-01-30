@@ -163,7 +163,7 @@ CREATE TABLE MRMAP (
 	MAPSETCUI	char(8),
 	MAPSETSAB	char(40),
 	MAPSUBSETID	char(10),
-	MAPRANK	integer external,
+	MAPRANK	integer,
 	MAPID	char(50),
 	MAPSID	char(50),
 	FROMID	char(50),
