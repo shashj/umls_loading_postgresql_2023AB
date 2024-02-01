@@ -9,8 +9,6 @@ This script has been tested in PostgreSQL 8.2.3 on Mac OS 10.4.10
 Thank you for Mr Banda and Mr Bedrick!
 This script has been tested in PostgreSQL 11.2 on Linux (Deepin 20.1, Debain 10 cored).
 
-This script is modified to work with PostgreSQL 16 and UMLS2023AB
-
 */
 
 create schema if not exists _2023ab; /* You can change the schema name as your wish. */
@@ -84,7 +82,7 @@ CREATE TABLE MRDEF (
 	ATUI	char(11) NOT NULL,
 	SATUI	char(50),
 	SAB	char(40) NOT NULL,
-	DEF	char(4000) NOT NULL,
+	DEF	text NOT NULL,
 	SUPPRESS	char(1) NOT NULL,
 	CVF	integer,
 	dummy char(1)
@@ -112,9 +110,9 @@ CREATE TABLE MRFILES (
 	FIL	char(50),
 	DES	char(200),
 	FMT	char(300),
-	CLS	integer,
-	RWS	integer,
-	BTS	integer,
+	CLS	bigint,
+	RWS	bigint,
+	BTS	bigint,
 	dummy char(1)
 );
 
@@ -207,7 +205,7 @@ ALTER TABLE MRRANK DROP COLUMN dummy;
 DROP TABLE if exists MRREL;
 CREATE TABLE MRREL (
 	CUI1	char(8) NOT NULL,
-	AUI1	char(9) NOT NULL,
+	AUI1	char(9),
 	STYPE1	char(50) NOT NULL,
 	REL	char(4) NOT NULL,
 	CUI2	char(8) NOT NULL,
@@ -273,7 +271,7 @@ CREATE TABLE MRSAT (
 	SATUI	char(50),
 	ATN	char(100) NOT NULL,
 	SAB	char(40) NOT NULL,
-	ATV	char(4000),
+	ATV	text,
 	SUPPRESS	char(1) NOT NULL,
 	CVF	integer,
 	dummy char(1)
